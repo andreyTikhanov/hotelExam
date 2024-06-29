@@ -17,15 +17,19 @@ namespace MyHotel.View
             NavigationService.GoBack();
         }
 
-        private void btnOk_Click(object sender, System.Windows.RoutedEventArgs e)
+        private async void btnOk_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if(tbNameUser.Text==string.Empty) return;
+            HotelRepository repository = new();
+
+            if (tbNameUser.Text==string.Empty) return;
             User user = new User();
             user.UserName = tbNameUser.Text;
-            user.UserPhone = tbPhoneUser.Text;
+            user.UserLogin = tbLoginUser.Text;
+            user.UserPassword = Crypto.CryptPassword(pbPasswordUser.Password);
             user.UserEmail = tbEmailUser.Text;
-            HotelRepository repository = new ();
-            repository.AddUser(user);
+            user.UserPhone = tbPhoneUser.Text;
+
+            await repository.AddUserAsync(user);
             CongratulationWindow congratulationWindow = new CongratulationWindow();
             congratulationWindow.Show();
             NavigationService.GoBack();

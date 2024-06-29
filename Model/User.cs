@@ -22,6 +22,21 @@ namespace MyHotel.Model
 			get { return userName; }
 			set { userName = value; }
 		}
+		private string userLogin;
+
+		public string UserLogin
+		{
+			get { return userLogin; }
+			set { userLogin = value; }
+		}
+		private string userPassword;
+
+		public string UserPassword
+		{
+			get { return userPassword; }
+			set { userPassword = value; }
+		}
+
 		private string userEmail;
 
 		public string UserEmail

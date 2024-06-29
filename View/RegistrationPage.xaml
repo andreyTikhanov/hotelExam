@@ -9,14 +9,18 @@
       Title="RegistrationPage">
 
     <StackPanel Background="Wheat">
-        <Label Content="Пожалуйста, заполните данные о себе" Style="{StaticResource myLabels}" Foreground="#92828D" Margin="130 20 0 0"></Label>
-        <Label Content="Введите ваше имя:" Style="{StaticResource myLabels}" Foreground="#92828D" Margin="10 20 0 0"></Label>
-        <TextBox Style="{StaticResource myTextBoxes}" Name="tbNameUser" Margin="10 10 10 0"></TextBox>
+        <Label Content="Пожалуйста, заполните данные о себе" Style="{StaticResource myLabels}" Foreground="#92828D" Margin="170 20 0 0"></Label>
+        <Label Content="Введите ваше имя:" Style="{StaticResource myLabels}" Foreground="#92828D" Margin="10 0 0 0"></Label>
+        <TextBox Style="{StaticResource myTextBoxes}" Name="tbNameUser" Margin="10 0 10 0"></TextBox>
+        <Label Content="Придумайте логин:" Style="{StaticResource myLabels}" Foreground="#92828D" Margin="10 0 0 0"></Label>
+        <TextBox Style="{StaticResource myTextBoxes}" Name="tbLoginUser" Margin="10 0 10 0"></TextBox>
+        <Label Content="Придумайте пароль: " Style="{StaticResource myLabels}" Foreground="#92828D" ></Label>
+        <PasswordBox x:Name="pbPasswordUser" Foreground="#ADAABF" Background="#EAF7CF" FontSize="20" Margin="10 0 10 0"></PasswordBox>
         <Label Content="Введите номер телефона: " Style="{StaticResource myLabels}" Foreground="#92828D" ></Label>
-        <TextBox Style="{StaticResource myTextBoxes}" Name="tbPhoneUser" Margin="10 10 10 0"></TextBox>
+        <TextBox Style="{StaticResource myTextBoxes}" Name="tbPhoneUser" Margin="10 0 10 0"></TextBox>
         <Label Content="Введите адрес электронной почты: " Style="{StaticResource myLabels}" Foreground="#92828D" ></Label>
-        <TextBox Style="{StaticResource myTextBoxes}" Name="tbEmailUser" Margin="10 10 10 0"></TextBox>
-        <Button Style="{StaticResource myButton}" Margin="0 30 0 0" Content="ОК" Click="btnOk_Click"></Button>
-        <Button Style="{StaticResource myButton}" Margin="0 30 0 0" Content="Выйти" Click="btnExit_Click"></Button>
+        <TextBox Style="{StaticResource myTextBoxes}" Name="tbEmailUser" Margin="10 0 10 0"></TextBox>
+        <Button Style="{StaticResource myButton}" Margin="0 20 0 0" Content="ОК" Click="btnOk_Click"></Button>
+        <Button Style="{StaticResource myButton}" Margin="0 10 0 0" Content="Выйти" Click="btnExit_Click"></Button>
     </StackPanel>
 </Page>

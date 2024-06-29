@@ -3,6 +3,6 @@
     <Style x:Key="myTextBoxes" TargetType="TextBox">
         <Setter Property="Background" Value="#EAF7CF"/>
         <Setter Property="Foreground" Value="#ADAABF"/>
-        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="FontSize" Value="20"/>
     </Style>
 </ResourceDictionary>

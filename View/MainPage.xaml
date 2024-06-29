@@ -16,9 +16,11 @@
         <Grid Grid.Row="0">
             <Label Margin="78,10,10,0" Style="{StaticResource myLabels}" Height="47" VerticalAlignment="Top">Отель тиханов плаза приветствует своих гостей</Label>
             <Button Style="{StaticResource myButton}" Click="btnRegistation_Click" Name="btnRegistration"  Content="Зарегистрироваться" Margin="20,68,500,92"></Button>
-            <Button Style="{StaticResource myButton}"  Content="Войти" Margin="20,130,500,30"></Button>
+            <Button Style="{StaticResource myButton}"  Content="Войти" Click="btnEnter_Click" Margin="20,130,500,30"></Button>
             <Button Style="{StaticResource myButton}"  Content="Выбрать номер" Margin="315,68,255,92"></Button>
-            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+            <Label Style="{StaticResource myLabels}" Name="lbNameUser" Content="Привет" Margin="559,119,128,44" />
+
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="37,144,446,6"/>
         </Grid>
         <Grid Grid.Row="1">
             <Image Source="\Images\mainPage.jpg" Stretch="Fill"/>
