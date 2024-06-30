@@ -25,12 +25,15 @@ namespace MyHotel.View
             if (tbLoginUser.Text == string.Empty || pbPasswordUser.Password == string.Empty) return;
             string userPassword = Crypto.CryptPassword((pbPasswordUser.Password));
             HotelRepository repository = new();
+            
             User user = null;
             user = await repository.GetUserAsync(tbLoginUser.Text, userPassword);
             if (user == null)
             {
-                tbLoginUser.Background = new SolidColorBrush(Colors.Red);
-                tbLoginUser.Text = "Вы ввели не корректные данные";
+                lbNameUser.Foreground= new BrushConverter().ConvertFromString("#ADAABF") as Brush;
+                lbNameUser.Content = "Вы ввели неверные данные. Попробуте еще раз";
+                tbLoginUser.Text = string.Empty;
+                pbPasswordUser.Password = string.Empty;
                 return;
             }
             NavigationService.Navigate(new MainPage(user));

@@ -55,6 +55,16 @@ namespace MyHotel.DataBase
             await _connection.CloseAsync();
             return user;
         }
+        public async Task<bool> IsLoginUser(string login)
+        {
+            await _connection.OpenAsync();
+            string query = "select count(*) from users where login_user = @login";
+            MySqlCommand cmd = new(query, _connection);
+            cmd.Parameters.AddWithValue("@login", login);
+            int count = Convert.ToInt32(await cmd.ExecuteScalarAsync());
+            await _connection.CloseAsync();
+            return count > 0;
+        }
 
         
     }

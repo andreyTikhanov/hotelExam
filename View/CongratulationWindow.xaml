@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="CongratulationWindow" Height="250" Width="400">
     <StackPanel Background="Bisque">
-        <Label Style="{StaticResource myLabels}" Content="Поздравляем с регистрацией!" Margin="20 30 0 0"></Label>
-        <Button Style="{StaticResource myButton}" Content="Ok" Margin="0 60 0 0" Click="btnOk_Click"></Button>
+        <Label Margin="10 40 0 0" Style="{StaticResource myLabels}" Content="Поздравляем с регистрацией!" Width="324"/>
+        <Button Style="{StaticResource myButton}" Content="Ok" Margin="0 60 0 0" Click="btnOk_Click"/>
     </StackPanel>
 </Window>

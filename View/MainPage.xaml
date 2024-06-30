@@ -18,7 +18,7 @@
             <Button Style="{StaticResource myButton}" Click="btnRegistation_Click" Name="btnRegistration"  Content="Зарегистрироваться" Margin="20,68,500,92"></Button>
             <Button Style="{StaticResource myButton}"  Content="Войти" Click="btnEnter_Click" Margin="20,130,500,30"></Button>
             <Button Style="{StaticResource myButton}"  Content="Выбрать номер" Margin="315,68,255,92"></Button>
-            <Label Style="{StaticResource myLabels}" Name="lbNameUser" Content="Привет" Margin="559,119,128,44" />
+            <Label Style="{StaticResource myLabels}" Name="lbNameUser" Margin="559,119,128,44" />
 
             <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="37,144,446,6"/>
         </Grid>

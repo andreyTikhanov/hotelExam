@@ -8,9 +8,9 @@
       d:DesignHeight="550" d:DesignWidth="800"
       Title="RegistrationPage">
 
-    <StackPanel Background="Wheat">
+    <StackPanel Background="Bisque">
         <Label Content="Пожалуйста, заполните данные о себе" Style="{StaticResource myLabels}" Foreground="#92828D" Margin="170 20 0 0"></Label>
-        <Label Content="Введите ваше имя:" Style="{StaticResource myLabels}" Foreground="#92828D" Margin="10 0 0 0"></Label>
+        <Label Name="lbLoginUser" Content="Введите ваше имя:" Style="{StaticResource myLabels}" Foreground="#92828D" Margin="10 0 0 0"></Label>
         <TextBox Style="{StaticResource myTextBoxes}" Name="tbNameUser" Margin="10 0 10 0"></TextBox>
         <Label Content="Придумайте логин:" Style="{StaticResource myLabels}" Foreground="#92828D" Margin="10 0 0 0"></Label>
         <TextBox Style="{StaticResource myTextBoxes}" Name="tbLoginUser" Margin="10 0 10 0"></TextBox>

@@ -1,6 +1,7 @@
 ﻿using MyHotel.DataBase;
 using MyHotel.Model;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace MyHotel.View
 {
@@ -21,7 +22,24 @@ namespace MyHotel.View
         {
             HotelRepository repository = new();
 
-            if (tbNameUser.Text==string.Empty) return;
+            if (tbNameUser.Text == string.Empty || tbLoginUser.Text == string.Empty || pbPasswordUser.Password == string.Empty)
+            {
+                lbLoginUser.Foreground = new BrushConverter().ConvertFromString("#ADAABF") as Brush;
+                lbLoginUser.Content = "Поля имя, логин и пароль обязательны для заполнения";
+                return;
+            }
+            bool isLoginTaken = true;
+            while (isLoginTaken)
+            {
+                isLoginTaken = await repository.IsLoginUser(tbLoginUser.Text);
+                if (isLoginTaken)
+                {
+                    lbLoginUser.Foreground = new BrushConverter().ConvertFromString("#ADAABF") as Brush;
+                    lbLoginUser.Content = "Введенный вами логин уже занят. Придумайте новый логин";
+                    tbLoginUser.Focus();
+                    return;
+                }
+            }
             User user = new User();
             user.UserName = tbNameUser.Text;
             user.UserLogin = tbLoginUser.Text;
@@ -32,7 +50,7 @@ namespace MyHotel.View
             await repository.AddUserAsync(user);
             CongratulationWindow congratulationWindow = new CongratulationWindow();
             congratulationWindow.Show();
-            NavigationService.GoBack();
+            NavigationService.Navigate(new MainPage(user));
         }
     }
 }

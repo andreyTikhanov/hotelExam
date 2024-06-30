@@ -10,10 +10,14 @@
 
   <ItemGroup>
     <None Remove="Images\mainPage.jpg" />
+    <None Remove="Images\Renaissance_Hotels_Logo.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Images\mainPage.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Renaissance_Hotels_Logo.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

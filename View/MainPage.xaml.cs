@@ -15,7 +15,7 @@ namespace MyHotel.View
         public MainPage(User user)
         {
             InitializeComponent();
-            lbNameUser.Content="Привет, "+user.UserName;
+            lbNameUser.Content="Привет, " + user.UserName;
             
         }
 
