@@ -1,0 +1,25 @@
+﻿<Page x:Class="MyHotel.View.ChangeUserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MyHotel.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ChangeUserPage">
+    <StackPanel Background="Bisque">
+        <Label Content="Выберите данные для изменения :" Style="{StaticResource myLabels}" Foreground="#92828D" Margin="170 20 0 0"></Label>
+        <Label Name="lbNameUser" Content="Изменить имя:" Style="{StaticResource myLabels}" Foreground="#92828D" Margin="10 0 0 0"></Label>
+        <TextBox Style="{StaticResource myTextBoxes}" Name="tbNameUser" Margin="10 0 10 0"></TextBox>
+        <Label Content="Изменить логин:" Style="{StaticResource myLabels}" Foreground="#92828D" Margin="10 0 0 0"></Label>
+        <TextBox Style="{StaticResource myTextBoxes}" Name="tbLoginUser" Margin="10 0 10 0"></TextBox>
+        <Label Content="Изменить пароль: " Style="{StaticResource myLabels}" Foreground="#92828D" ></Label>
+        <PasswordBox x:Name="pbPasswordUser" Foreground="#ADAABF" Background="#EAF7CF" FontSize="20" Margin="10 0 10 0"></PasswordBox>
+        <Label Content="Изменить номер телефона: " Style="{StaticResource myLabels}" Foreground="#92828D" ></Label>
+        <TextBox Style="{StaticResource myTextBoxes}" Name="tbPhoneUser" Margin="10 0 10 0"></TextBox>
+        <Label Content="Изменить адрес электронной почты: " Style="{StaticResource myLabels}" Foreground="#92828D" ></Label>
+        <TextBox Style="{StaticResource myTextBoxes}" Name="tbEmailUser" Margin="10 0 10 0"></TextBox>
+        <Button Style="{StaticResource myButton}" Margin="0 20 0 0" Content="ОК" Click="btnOk_Click"></Button>
+        <Button Style="{StaticResource myButton}" Margin="0 10 0 0" Content="Выйти" Click="btnExit_Click"></Button>
+    </StackPanel>
+</Page>

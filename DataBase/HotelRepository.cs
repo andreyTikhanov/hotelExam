@@ -1,5 +1,6 @@
 ﻿using MyHotel.Model;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Cms;
 namespace MyHotel.DataBase
 {
     public class HotelRepository : IDisposable
@@ -65,6 +66,35 @@ namespace MyHotel.DataBase
             await _connection.CloseAsync();
             return count > 0;
         }
+        public async Task AddCardAsync(int idUser, string title, decimal balance)
+        {
+            await _connection.OpenAsync();
+            string query = "insert into discountCards values (null, @user_id, @title, @balance)";
+            MySqlCommand cmd = new(query, _connection);
+            cmd.Parameters.AddWithValue("@user_id", idUser);
+            cmd.Parameters.AddWithValue("@title", title);
+            cmd.Parameters.AddWithValue("@balance", balance);
+            await cmd.ExecuteNonQueryAsync();
+            await _connection.CloseAsync();
+        }
+        public async Task UpdateUserAsync(User user)
+        {
+            await _connection.OpenAsync();
+            string query = "update users set name_user = @name," +
+                           "login_user = @login, password_user = @password, " +
+                           "email_user = @email, phone_user = @phone_user" +
+                           "where id = @id";
+            MySqlCommand cmd = new(query, _connection);
+            cmd.Parameters.AddWithValue("@id", user.Id);
+            cmd.Parameters.AddWithValue("@name", user.UserName);
+            cmd.Parameters.AddWithValue("@login", user.UserLogin);
+            cmd.Parameters.AddWithValue("@password", user.UserPassword);
+            cmd.Parameters.AddWithValue("@email", user.UserEmail);
+            cmd.Parameters.AddWithValue("@phone_user", user.UserPhone);
+            await cmd.ExecuteNonQueryAsync();
+            await _connection.CloseAsync();
+        }
+
 
         
     }

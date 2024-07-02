@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Background="Bisque" Grid.Row="0">
-            <Label Name="lbNameUser" Foreground="#92828D" Content="Введите имя:" Margin="10 0 0 0" Style="{StaticResource myLabels}"></Label>
+            <Label Name="lbNameUser" Foreground="#92828D" Content="Введите логин:" Margin="10 0 0 0" Style="{StaticResource myLabels}"></Label>
             <TextBox x:Name="tbLoginUser" Style="{StaticResource myTextBoxes}" Margin="10 10 10 0"/>
             <Label Foreground="#92828D" Content="Введите пароль:" Margin="10 0 0 0" Style="{StaticResource myLabels}"></Label>
             <PasswordBox x:Name="pbPasswordUser" Foreground="#ADAABF" Background="#EAF7CF" FontSize="20" Margin="10 0 10 0"></PasswordBox>
@@ -24,7 +24,7 @@
 
         </StackPanel>
         <Grid Grid.Row="1">
-            <Image Source="\Images\Renaissance_Hotels_Logo.jpg" Stretch="Fill"/>
+            <Image Source="\Images\Picture.png" Stretch="Fill"/>
         </Grid>
     </Grid>
 </Page>

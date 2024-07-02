@@ -1,6 +1,5 @@
 ﻿using MyHotel.DataBase;
 using MyHotel.Model;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -25,12 +24,12 @@ namespace MyHotel.View
             if (tbLoginUser.Text == string.Empty || pbPasswordUser.Password == string.Empty) return;
             string userPassword = Crypto.CryptPassword((pbPasswordUser.Password));
             HotelRepository repository = new();
-            
+
             User user = null;
             user = await repository.GetUserAsync(tbLoginUser.Text, userPassword);
             if (user == null)
             {
-                lbNameUser.Foreground= new BrushConverter().ConvertFromString("#ADAABF") as Brush;
+                lbNameUser.Foreground = new BrushConverter().ConvertFromString("#ADAABF") as Brush;
                 lbNameUser.Content = "Вы ввели неверные данные. Попробуте еще раз";
                 tbLoginUser.Text = string.Empty;
                 pbPasswordUser.Password = string.Empty;

@@ -9,7 +9,6 @@ namespace MyHotel.Model
     public class User
     {
 		private int id;
-
 		public int Id
 		{
 			get { return id; }
@@ -51,9 +50,12 @@ namespace MyHotel.Model
 			get { return userPhone; }
 			set { userPhone = value; }
 		}
-
-
-
+		private UserDiscountCard discountCard;
+		public UserDiscountCard DiscountCard
+		{
+			get { return discountCard; }
+			set { discountCard = value; }
+		}
 
 	}
 }

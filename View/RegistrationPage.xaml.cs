@@ -1,5 +1,6 @@
 ﻿using MyHotel.DataBase;
 using MyHotel.Model;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -46,8 +47,10 @@ namespace MyHotel.View
             user.UserPassword = Crypto.CryptPassword(pbPasswordUser.Password);
             user.UserEmail = tbEmailUser.Text;
             user.UserPhone = tbPhoneUser.Text;
-
+            UserDiscountCard userDiscountCard = new();
             await repository.AddUserAsync(user);
+            User newUser = await repository.GetUserAsync(user.UserLogin, user.UserPassword);
+            await repository.AddCardAsync(newUser.Id, userDiscountCard.Tilte, userDiscountCard.Balance);
             CongratulationWindow congratulationWindow = new CongratulationWindow();
             congratulationWindow.Show();
             NavigationService.Navigate(new MainPage(user));

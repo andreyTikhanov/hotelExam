@@ -8,22 +8,25 @@
       d:DesignHeight="550" d:DesignWidth="800"
       Title="MainPage">
 
-    <Grid>
+    <Grid Background="Bisque">
         <Grid.RowDefinitions>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Label Margin="78,10,10,0" Style="{StaticResource myLabels}" Height="47" VerticalAlignment="Top">Отель тиханов плаза приветствует своих гостей</Label>
-            <Button Style="{StaticResource myButton}" Click="btnRegistation_Click" Name="btnRegistration"  Content="Зарегистрироваться" Margin="20,68,500,92"></Button>
-            <Button Style="{StaticResource myButton}"  Content="Войти" Click="btnEnter_Click" Margin="20,130,500,30"></Button>
-            <Button Style="{StaticResource myButton}"  Content="Выбрать номер" Margin="315,68,255,92"></Button>
-            <Label Style="{StaticResource myLabels}" Name="lbNameUser" Margin="559,119,128,44" />
-
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
+                <Button Style="{StaticResource myButton}" Width="153" Height="100" Content="Выбрать номер" Name="btnChoseRoom" Click="btnChose_Click"/>
+                <Button Style="{StaticResource myButton}" Width="153" Height="100" Click="btnRegistation_Click" Name="btnRegistration" Content="Регистрация"/>
+                <Button Style="{StaticResource myButton}" Width="153" Height="100" Click="btnEnter_Click" Content="Войти"/>
+                <Button Style="{StaticResource myButton}" Width="153" Height="100" Click="btnSetting_Click" Name="btnSetting"  Content="Настройки"/>
+                <Button Style="{StaticResource myButton}" Width="153" Height="100" Click="btnExit_Click" Content="Выйти" ></Button>
+            </StackPanel>
+            <Label Margin="78,120,10,0" Style="{StaticResource myLabels}" Height="47" Name="lbInfo" VerticalAlignment="Top"></Label>
+            <Label Style="{StaticResource myLabels}" Name="lbNameUser" Margin="6,124,222,13" />
             <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="37,144,446,6"/>
         </Grid>
         <Grid Grid.Row="1">
-            <Image Source="\Images\mainPage.jpg" Stretch="Fill"/>
+            <Image Source="\Images\Picture.png" Stretch="Fill"/>
         </Grid>
     </Grid>
 </Page>
