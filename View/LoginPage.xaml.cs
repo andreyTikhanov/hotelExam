@@ -1,5 +1,7 @@
-﻿using MyHotel.DataBase;
+﻿using HotelCommon.Model;
 using MyHotel.Model;
+using System.Net.Sockets;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -22,20 +24,52 @@ namespace MyHotel.View
         private async void btnOk_Click(object sender, RoutedEventArgs e)
         {
             if (tbLoginUser.Text == string.Empty || pbPasswordUser.Password == string.Empty) return;
-            string userPassword = Crypto.CryptPassword((pbPasswordUser.Password));
-            HotelRepository repository = new();
+            string userPassword = Crypto.CryptPassword(pbPasswordUser.Password);
 
-            User user = null;
-            user = await repository.GetUserAsync(tbLoginUser.Text, userPassword);
-            if (user == null)
+            string result = await LoginUser(tbLoginUser.Text, userPassword);
+
+            if (result.StartsWith("Login successful"))
+            {
+                var parts = result.Split('|');
+                var user = new User
+                {
+                    UserName = parts[1],
+                    UserLogin = parts[2],
+                    UserEmail = parts[3],
+                    UserPhone = parts[4]
+                };
+
+                NavigationService.Navigate(new MainPage(user));
+            }
+            else
             {
                 lbNameUser.Foreground = new BrushConverter().ConvertFromString("#ADAABF") as Brush;
-                lbNameUser.Content = "Вы ввели неверные данные. Попробуте еще раз";
+                lbNameUser.Content = "Вы ввели неверные данные. Попробуйте еще раз";
                 tbLoginUser.Text = string.Empty;
                 pbPasswordUser.Password = string.Empty;
-                return;
             }
-            NavigationService.Navigate(new MainPage(user));
+        }
+
+        private async Task<string> LoginUser(string login, string password)
+        {
+            try
+            {
+                using (var client = new TcpClient("localhost", 5000))
+                using (var stream = client.GetStream())
+                {
+                    string request = $"LOGIN|{login}|{password}";
+                    var requestBytes = Encoding.UTF8.GetBytes(request);
+                    await stream.WriteAsync(requestBytes, 0, requestBytes.Length);
+
+                    var buffer = new byte[1024];
+                    var bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+                    return Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                }
+            }
+            catch (Exception ex)
+            {
+                return $"Ошибка подключения: {ex.Message}";
+            }
         }
     }
 }

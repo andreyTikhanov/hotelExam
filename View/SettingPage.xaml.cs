@@ -1,5 +1,6 @@
-﻿using MyHotel.Model;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using HotelCommon.Model;
+
 
 namespace MyHotel.View
 {

@@ -1,9 +1,10 @@
-﻿using MyHotel.DataBase;
-using MyHotel.Model;
+﻿using MyHotel.Model;
+using System.Net.Sockets;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-
+using HotelCommon.Model;
 namespace MyHotel.View
 {
 
@@ -14,46 +15,68 @@ namespace MyHotel.View
             InitializeComponent();
         }
 
-        private void btnExit_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }
 
-        private async void btnOk_Click(object sender, System.Windows.RoutedEventArgs e)
+        private async void btnOk_Click(object sender, RoutedEventArgs e)
         {
-            HotelRepository repository = new();
-
-            if (tbNameUser.Text == string.Empty || tbLoginUser.Text == string.Empty || pbPasswordUser.Password == string.Empty)
+            if (string.IsNullOrEmpty(tbNameUser.Text) || string.IsNullOrEmpty(tbLoginUser.Text) || string.IsNullOrEmpty(pbPasswordUser.Password))
             {
                 lbLoginUser.Foreground = new BrushConverter().ConvertFromString("#ADAABF") as Brush;
                 lbLoginUser.Content = "Поля имя, логин и пароль обязательны для заполнения";
                 return;
             }
-            bool isLoginTaken = true;
-            while (isLoginTaken)
+
+            string result = await RegisterUser(tbNameUser.Text, tbLoginUser.Text, pbPasswordUser.Password, tbEmailUser.Text);
+
+            if (result == "User registered successfully")
             {
-                isLoginTaken = await repository.IsLoginUser(tbLoginUser.Text);
-                if (isLoginTaken)
+                CongratulationWindow congratulationWindow = new CongratulationWindow();
+                congratulationWindow.Show();
+                NavigationService.Navigate(new MainPage(new User
                 {
-                    lbLoginUser.Foreground = new BrushConverter().ConvertFromString("#ADAABF") as Brush;
-                    lbLoginUser.Content = "Введенный вами логин уже занят. Придумайте новый логин";
-                    tbLoginUser.Focus();
-                    return;
+                    UserName = tbNameUser.Text,
+                    UserLogin = tbLoginUser.Text,
+                    UserPassword = Crypto.CryptPassword(pbPasswordUser.Password),
+                    UserEmail = tbEmailUser.Text,
+                    UserPhone = tbPhoneUser.Text
+                }));
+            }
+            else if (result == "Login is already taken")
+            {
+                lbLoginUser.Foreground = new BrushConverter().ConvertFromString("#ADAABF") as Brush;
+                lbLoginUser.Content = "Введенный вами логин уже занят. Придумайте новый логин";
+                tbLoginUser.Focus();
+            }
+            else
+            {
+                lbLoginUser.Foreground = new BrushConverter().ConvertFromString("#ADAABF") as Brush;
+                lbLoginUser.Content = $"Ошибка регистрации: {result}";
+            }
+        }
+
+        private async Task<string> RegisterUser(string username, string login, string password, string email)
+        {
+            try
+            {
+                using (var client = new TcpClient("localhost", 5000))
+                using (var stream = client.GetStream())
+                {
+                    string request = $"REGISTER|{username}|{login}|{password}|{email}";
+                    var requestBytes = Encoding.UTF8.GetBytes(request);
+                    await stream.WriteAsync(requestBytes, 0, requestBytes.Length);
+
+                    var buffer = new byte[1024];
+                    var bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+                    return Encoding.UTF8.GetString(buffer, 0, bytesRead);
                 }
             }
-            User user = new User();
-            user.UserName = tbNameUser.Text;
-            user.UserLogin = tbLoginUser.Text;
-            user.UserPassword = Crypto.CryptPassword(pbPasswordUser.Password);
-            user.UserEmail = tbEmailUser.Text;
-            user.UserPhone = tbPhoneUser.Text;
-            UserDiscountCard userDiscountCard = new();
-            await repository.AddUserAsync(user);
-            User newUser = await repository.GetUserAsync(user.UserLogin, user.UserPassword);
-            await repository.AddCardAsync(newUser.Id, userDiscountCard.Tilte, userDiscountCard.Balance);
-            CongratulationWindow congratulationWindow = new CongratulationWindow();
-            congratulationWindow.Show();
-            NavigationService.Navigate(new MainPage(user));
+            catch (Exception ex)
+            {
+                return $"Ошибка подключения: {ex.Message}";
+            }
         }
     }
 }

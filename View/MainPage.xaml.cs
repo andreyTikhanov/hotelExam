@@ -1,8 +1,7 @@
-﻿using MyHotel.DataBase;
-using MyHotel.Model;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using HotelCommon.Model;
 
 namespace MyHotel.View
 {
@@ -20,8 +19,8 @@ namespace MyHotel.View
         {
             userPage = user;
             InitializeComponent();
-            lbNameUser.Content="Привет, " + user.UserName;
-            
+            lbNameUser.Content = "Привет, " + user.UserName;
+
         }
 
         private void btnRegistation_Click(object sender, RoutedEventArgs e)
