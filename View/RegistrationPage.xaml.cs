@@ -35,7 +35,6 @@ namespace MyHotel.View
             user.UserPassword = password;
             user.UserPhone = tbPhoneUser.Text;
             user.UserEmail = tbEmailUser.Text;
-            NavigationService.Navigate(new MainPage(user));
             string result = await RegisterUser(user.UserName, user.UserLogin, user.UserPassword, user.UserPhone, user.UserEmail, user.Balance);
             if (result == "true")
             {

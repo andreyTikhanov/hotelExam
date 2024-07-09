@@ -10,9 +10,11 @@
 
     <Grid Background="Bisque">
         <StackPanel>
-            <Button Click="btnChangeUserClick" Margin="0 100 0 20" Style="{StaticResource myButton}" Content="Изменить профиль"></Button>
-            <Button Margin="0 20 0 20" Style="{StaticResource myButton}" Content="Управление картой"/>
+            <TextBox Style="{StaticResource myTextBoxes}" Name="tbMoney" Margin="290 150 290 0"/>
+            <Button Margin="0 40 0 20" Style="{StaticResource myButton}" Content="Пополнить счет" Click="btnAddMoney"/>
+            <Label Style="{StaticResource myLabels}" Name="lbFunc" Content="Ведутся работы по добавлению функциональности" Margin="150 0 150 0"/>
             <Button Style="{StaticResource myButton}" Content="Назад" Margin="0 60 0 0" Click="btnBack_Click"/>
+            
 
         </StackPanel>
     </Grid>
