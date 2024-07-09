@@ -25,18 +25,17 @@ namespace MyHotel.View
         {
             if (tbLoginUser.Text == string.Empty || pbPasswordUser.Password == string.Empty) return;
             string userPassword = Crypto.CryptPassword(pbPasswordUser.Password);
-
             string result = await LoginUser(tbLoginUser.Text, userPassword);
-
-            if (result.StartsWith("Login successful"))
+            if (result.StartsWith("true"))
             {
                 var parts = result.Split('|');
                 var user = new User
                 {
                     UserName = parts[1],
                     UserLogin = parts[2],
-                    UserEmail = parts[3],
-                    UserPhone = parts[4]
+                    UserPassword = parts[3],
+                    UserPhone = parts[4],
+                    UserEmail = parts[5]
                 };
 
                 NavigationService.Navigate(new MainPage(user));
@@ -57,19 +56,22 @@ namespace MyHotel.View
                 using (var client = new TcpClient("localhost", 5000))
                 using (var stream = client.GetStream())
                 {
-                    string request = $"LOGIN|{login}|{password}";
+                    string request = $"LOGIN|{login}|{password}\n";
                     var requestBytes = Encoding.UTF8.GetBytes(request);
                     await stream.WriteAsync(requestBytes, 0, requestBytes.Length);
 
                     var buffer = new byte[1024];
                     var bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
-                    return Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                    string response = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                    return response;
                 }
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"Ошибка подключения: {ex.Message}");
                 return $"Ошибка подключения: {ex.Message}";
             }
         }
+
     }
 }
