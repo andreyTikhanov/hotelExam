@@ -31,13 +31,14 @@ namespace MyHotel.View
                 var parts = result.Split('|');
                 var user = new User
                 {
-                    UserName = parts[1],
-                    UserLogin = parts[2],
-                    UserPassword = parts[3],
-                    UserPhone = parts[4],
-                    UserEmail = parts[5]
+                    Id =int.Parse( parts[1]),   
+                    UserName = parts[2],
+                    UserLogin = parts[3],
+                    UserPassword = parts[4],
+                    UserPhone = parts[5],
+                    UserEmail = parts[6],
+                    Balance =decimal.Parse( parts[7]),
                 };
-
                 NavigationService.Navigate(new MainPage(user));
             }
             else

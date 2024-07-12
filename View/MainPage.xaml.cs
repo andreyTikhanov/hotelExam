@@ -12,14 +12,13 @@ namespace MyHotel.View
         {
             InitializeComponent();
             btnSetting.IsEnabled = false;
-            btnChoseRoom.IsEnabled = false;
-            lbInfo.Content = "Для управления настройками и выбора номера войдите в профиль";
+            lbInfo.Content = "Для управления настройками войдите в профиль";
         }
         public MainPage(User user)
         {
             userPage = user;
             InitializeComponent();
-            lbNameUser.Content = "Привет, " + user.UserName;
+            lbNameUser.Content = "Привет, " + userPage.UserName;
 
         }
 
@@ -40,7 +39,7 @@ namespace MyHotel.View
 
         private void btnChose_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new ChoiceRoom());
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)

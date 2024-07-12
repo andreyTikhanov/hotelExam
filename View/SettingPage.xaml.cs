@@ -18,12 +18,12 @@ namespace MyHotel.View
             InitializeComponent();
         }
 
-        private void btnBack_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
         }
 
-        private void btnAddMoney(object sender, System.Windows.RoutedEventArgs e)
+        private void btnAddMoney(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -35,10 +35,11 @@ namespace MyHotel.View
                 }
                 decimal sum = decimal.Parse(tbMoney.Text);
                 pageUser.Balance += sum;
-                var result = AddMoneyUser(pageUser.UserLogin, pageUser.Balance);
+                var result = AddMoneyUser(pageUser.Id, pageUser.Balance);
                 if (result != null)
                 {
-                    tbMoney.Text = "Баланс успешно пополнен";
+                    lbFunc.Content = "Баланс успешно пополнен";
+                    tbMoney.Text = "";
                 }
                 else
                 {
@@ -47,12 +48,12 @@ namespace MyHotel.View
             }catch (Exception ex) { }
         }
 
-        private async Task<string> AddMoneyUser(string login, decimal balance)
+        private async Task<string> AddMoneyUser(int id, decimal balance)
         {
             using (var client = new TcpClient("localhost", 5000))
             using(var stream = client.GetStream())
             {
-                string request = $"ADD|{login}|{balance}\n";
+                string request = $"ADD|{id}|{balance}\n";
                 var requestBytes = Encoding.UTF8.GetBytes(request) ;
 
                 await stream.WriteAsync(requestBytes, 0, requestBytes.Length) ;
@@ -61,7 +62,6 @@ namespace MyHotel.View
                 string response = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                 return response;
             }
-           
         }
     }
 }

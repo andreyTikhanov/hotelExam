@@ -1,0 +1,18 @@
+﻿<Page x:Class="MyHotel.View.ChoiceRoom"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MyHotel.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ChoiceRoom">
+
+    <Grid Background="Bisque">
+        <StackPanel>
+            <Label Margin="70 10 70 0" Style="{StaticResource myLabels}" Content="Выберите комнату: "></Label>
+            <ListBox FontSize="20" Foreground="#877983" Background="#DFD8B0" x:Name="lbRooms" Margin="0 20 0 10" Height="330"></ListBox>
+            <Button Click="btnBack_Click" Content="Назад" Style="{StaticResource myButton}"/>
+        </StackPanel>
+    </Grid>
+</Page>
